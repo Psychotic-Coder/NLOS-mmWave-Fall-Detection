@@ -26,7 +26,7 @@ class KalmanFilter:
 
 kf = {}
 fm = {}
-with open('C:/Users/Ashwin Adarsh/Desktop/TestRad/fall_app_walk_2.csv') as csvfile:
+with open('C:/Users/Ashwin Adarsh/Desktop/TestRad/fall_new_fall2.csv/data/Fall/r_1.csv') as csvfile:
     data_p1 = np.array(list(csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)))
 
 data_p1[:,1] -= np.amin(data_p1[:,1]) 
@@ -148,11 +148,11 @@ def update2D_cluster(i):
         xz2D.clear()
 
         xy2D.set_xlim(x_min, x_max)
-        xy2D.set_ylim(z_min, z_max)
+        xy2D.set_ylim(y_min, y_max)
         xz2D.set_xlim(x_min, x_max)
         xz2D.set_ylim(z_min, z_max)
 
-        xy2D.scatter(data_s[:,3], data_s[:,5], c=data_s[:,-1], s=10)
+        xy2D.scatter(data_s[:,3], data_s[:,4], c=data_s[:,-1], s=10)
         # xz2D.scatter(fm[i][0], fm[i][1], c="black", s=10)
         xz2D.scatter(data_filt[:,3], data_filt[:,5], c=data_filt[:,-1], s=10)
 
@@ -216,11 +216,12 @@ def update3D(i):
         # print(height, widthY, widthX)
         # create_skeleton(border_x_max,border_y_max,border_z_min, height, xyz3D_filtered)
 
-        plot_3D_box(fm[i][0], fm[i][1], border_z_min,widthX, height, widthY, xyz3D_filtered)
+        plot_3D_box(fm[i][0], fm[i][1], border_z_min, widthX, height, widthY, xyz3D_filtered)
 
 
         sc_noise = xyz3D_noise.scatter(data_s[:,3], data_s[:,4], data_s[:,5], s=10)
         sc_filt = xyz3D_filtered.scatter(data_filt[:,3], data_filt[:,4], data_filt[:,5], s=10)
+        xyz3D_filtered.scatter(fm[i][0], fm[i][1], s=10)
 
         sc_filt.set_array(data_filt[:,-1])
 
